@@ -151,5 +151,22 @@ btn_Healthy.addEventListener('click',function(){
       rendertable(petArr);
       healthycheck=false;
       btn_Healthy.innerText="Show Healthy Pet";
-    }})
+    }});
 
+function renderBreed(breedArr){
+  inp_Breed.innerHTML=''
+
+  breedArr.forEach(function(breed){
+    const option  = document.createElement('option');
+    option.innerHTML=breed.name;  
+    inp_Breed.appendChild(option);
+  }); 
+};
+
+inp_Type.addEventListener('change',function(){
+  const selectedType=this.value;
+  const storageBreedArr = getFromStorage('breedArr');
+  const breedArr = JSON.parse(storageBreedArr);
+  const filteredbreed = breedArr.filter(data=>data.type===selectedType);
+  renderBreed(filteredbreed);
+});
